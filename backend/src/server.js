@@ -4,6 +4,8 @@ import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
+import salesRoutes from "./routes/sales.js";
+import { requireAuth } from "./middleware/auth.js";
 
 if (!process.env.JWT_SECRET) {
   console.error("JWT_SECRET manquant dans le fichier .env");
@@ -19,7 +21,7 @@ app.use(cookieParser());
 
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 app.use("/api/auth", authRoutes);
-
+app.use("/api/sales",requireAuth, salesRoutes);
 app.use((req, res) => res.status(404).json({ message: "Route introuvable" }));
 
 app.use((err, req, res, next) => {
