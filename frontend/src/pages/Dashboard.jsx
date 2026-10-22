@@ -9,8 +9,9 @@ import {
 } from "lucide-react";
 import { api } from "../api";
 import { useAuth } from "../context/AuthContext";
+import useDocumentTitle from "../useDocumentTitle";
 
-const COLORS = ["#4f46e5", "#7c3aed", "#0ea5e9", "#f59e0b"];
+const COLORS = ["#0a3a66", "#0099e6", "#14d9c0", "#f59e0b"];
 const fmt = (n) => new Intl.NumberFormat("fr-FR").format(n) + " FCFA";
 
 const STATUS_STYLES = {
@@ -24,7 +25,7 @@ function KpiCard({ icon: Icon, label, value, hint, positive }) {
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-center justify-between">
         <p className="text-sm text-slate-500">{label}</p>
-        <span className="rounded-lg bg-indigo-50 p-2 text-indigo-600">
+        <span className="rounded-lg bg-brand-50 p-2 text-brand-600">
           <Icon className="size-5" />
         </span>
       </div>
@@ -41,6 +42,7 @@ function KpiCard({ icon: Icon, label, value, hint, positive }) {
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
+  useDocumentTitle("Tableau de bord – SalesBoard");
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
 
@@ -59,7 +61,7 @@ export default function Dashboard() {
     <div className="min-h-screen">
       <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-8">
-          <div className="flex items-center gap-2 text-lg font-semibold text-indigo-700">
+          <div className="flex items-center gap-2 text-lg font-semibold text-brand-700">
             <BarChart3 className="size-6" /> SalesBoard
           </div>
           <div className="flex items-center gap-3">
@@ -67,7 +69,7 @@ export default function Dashboard() {
               <p className="text-sm font-medium leading-tight">{user.name}</p>
               <p className="text-xs capitalize text-slate-500">{user.role}</p>
             </div>
-            <div className="flex size-9 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white">
+            <div className="flex size-9 items-center justify-center rounded-full bg-brand-600 font-semibold text-white">
               {user.name[0]}
             </div>
             <button
@@ -95,7 +97,7 @@ export default function Dashboard() {
 
         {!data && !error && (
           <div className="flex justify-center py-24">
-            <Loader2 className="size-8 animate-spin text-indigo-600" />
+            <Loader2 className="size-8 animate-spin text-brand-600" />
           </div>
         )}
 
@@ -122,15 +124,15 @@ export default function Dashboard() {
                     <AreaChart data={data.monthly}>
                       <defs>
                         <linearGradient id="rev" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.35} />
-                          <stop offset="95%" stopColor="#4f46e5" stopOpacity={0} />
+                          <stop offset="5%" stopColor="#0099e6" stopOpacity={0.35} />
+                          <stop offset="95%" stopColor="#0099e6" stopOpacity={0} />
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                       <XAxis dataKey="month" tick={{ fontSize: 12 }} />
                       <YAxis tick={{ fontSize: 12 }} tickFormatter={(v) => `${v / 1000000}M`} />
                       <Tooltip formatter={(v) => fmt(v)} />
-                      <Area type="monotone" dataKey="revenue" name="CA" stroke="#4f46e5" strokeWidth={2} fill="url(#rev)" />
+                      <Area type="monotone" dataKey="revenue" name="CA" stroke="#0099e6" strokeWidth={2} fill="url(#rev)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>

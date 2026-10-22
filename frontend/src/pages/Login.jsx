@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { BarChart3, Eye, EyeOff, Loader2, Lock, Mail, TrendingUp } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import useDocumentTitle from "../useDocumentTitle";
 
 export default function Login() {
   const { user, login } = useAuth();
+  useDocumentTitle("Connexion – SalesBoard");
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +39,7 @@ export default function Login() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Panneau visuel (caché sur mobile) */}
-      <div className="hidden lg:flex flex-col justify-between bg-gradient-to-br from-indigo-700 via-indigo-600 to-violet-600 p-12 text-white">
+      <div className="hidden lg:flex flex-col justify-between bg-gradient-to-br from-brand-900 via-brand-700 to-brand-500 p-12 text-white">
         <div className="flex items-center gap-2 text-xl font-semibold">
           <BarChart3 className="size-7" /> SalesBoard
         </div>
@@ -46,18 +48,18 @@ export default function Login() {
           <h2 className="text-4xl font-bold leading-tight">
             Pilotez vos ventes en temps réel.
           </h2>
-          <p className="mt-4 text-indigo-100 max-w-md">
+          <p className="mt-4 text-brand-100 max-w-md">
             Suivez votre chiffre d'affaires, vos commandes et vos meilleurs produits
             depuis un tableau de bord clair et sécurisé.
           </p>
         </div>
-        <p className="text-sm text-indigo-200">© 2026 SalesBoard</p>
+        <p className="text-sm text-brand-200">© 2026 SalesBoard</p>
       </div>
 
       {/* Formulaire */}
       <div className="flex items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-md">
-          <div className="lg:hidden flex items-center gap-2 text-xl font-semibold text-indigo-700 mb-8">
+          <div className="lg:hidden flex items-center gap-2 text-xl font-semibold text-brand-700 mb-8">
             <BarChart3 className="size-7" /> SalesBoard
           </div>
 
@@ -82,7 +84,7 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@demo.com"
-                  className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-10 pr-3 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+                  className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-10 pr-3 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
                 />
               </div>
             </div>
@@ -98,7 +100,7 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-10 pr-11 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
+                  className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-10 pr-11 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
                 />
                 <button
                   type="button"
@@ -114,7 +116,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={submitting}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-600 py-2.5 font-medium text-white transition hover:bg-indigo-700 disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 py-2.5 font-medium text-white transition hover:bg-brand-700 disabled:opacity-60"
             >
               {submitting && <Loader2 className="size-5 animate-spin" />}
               {submitting ? "Connexion..." : "Se connecter"}
