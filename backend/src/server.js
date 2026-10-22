@@ -16,7 +16,7 @@ if (!process.env.JWT_SECRET) {
 const app = express();
 
 // Nécessaire derrière un hébergeur (Render) pour les IP et les cookies sécurisés
-app.set("trust proxy", 1);
+app.set("trust proxy", 2);
 
 app.use(helmet());
 app.use("/api", rateLimit({ windowMs: 15 * 60 * 1000, limit: 300 }));
